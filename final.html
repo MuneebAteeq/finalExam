@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>E ticaret sitem - Sepetim</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link rel="icon" href="bm.png">
+</head>
+<body>
+<div class="container justify-content-center" style="text-align: center;">
+    <img src="bm.png" class="img-responsive center-block d-block mx-auto">
+    <h2>Erciyes Üniversitesi Bilgisayar<br>
+        Mühendisliği Bölümü Web<br>
+        Programlama 1 dersi final sorusu</h2>
+    <h3>Muneeb Ateeq - 1030516797</h3>
+    <h1>Alışveriş Uygulaması</h1>
+    <p>Vermek istediğiniz siparişler için aşağıdaki listeden seçerek
+        adedini belirtiniz.</p>
+    <div ng-app="myShoppingList" ng-cloak ng-controller="myCtrl" class="card m-3" style="max-width:400px;">
+        <header class="container p-3" style="background-color:lightgrey;">
+            <h3>Siparişleriniz</h3>
+        </header>
+        <ul class="list-group">
+            <li ng-repeat="x in products" class="list-group-item p-3">{{x}}<span ng-click="removeItem($index)" style="cursor:pointer;" class="right float-right">×</span></li>
+        </ul>
+        <div class="container-fluid p-16 justify-content-center">
+            <div class="row row justify-content-center">
+                <div class="input-group mb-3">
+                        <input placeholder="Indirim Kuponu" ng-model="addMe" class="form-control">
+                        <button ng-click="addItem()" class="input-group-text" style="background-color:gray;color:white;">Kupon Gir</button>
+                </div>
+            </div>
+            <p style="color:red;">{{errortext}}</p>
+        </div>
+    </div>
+    <div class="container justify-content-center">
+        <div class="card" style="width:400px">
+            <div class="card-body">
+                <h4 class="card-title">Ekmek</h4>
+                <h2>2₺ / adet</h2>
+                <p class="card-text">Somun ekmek<br>
+                    200 gr
+                </p>
+                <a href="#" class="btn btn-primary" style="width:100%">Sepete ekle</a>
+            </div>
+        </div>
+        <div class="card" style="width:400px">
+            <div class="card-body">
+                <h4 class="card-title">Çikolata</h4>
+                <h2>5₺ / adet</h2>
+                <p class="card-text">Bitter çikolata<br>
+                    60 gr
+                </p>
+                <a href="#" class="btn btn-primary" style="width:100%">Sepete ekle</a>
+            </div>
+        </div>
+        <br>
+        <div class="card" style="width:400px">
+            <div class="card-body">
+                <h4 class="card-title">Domates</h4>
+                <h2>6₺ / kg</h2>
+                <p class="card-text">Domates<br>
+                    Antalya Sera
+                </p>
+                <a href="#" class="btn btn-primary" style="width:100%">Sepete ekle</a>
+            </div>
+        </div>
+        <br>
+        <p>© Muneeb Ateeq @ Erciyes Üniversitesi Bilgisayar Mühendisliği Bölümü</p>
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Bölüm sayfası</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Alışveriş kuralları</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Destek</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<<script>
+var app = angular.module("myShoppingList", []);
+app.controller("myCtrl", function($scope) {
+    $scope.products = ["Somun ekmek", "Domates", "Çikolata"];
+    $scope.addItem = function () {
+        $scope.errortext = "";
+        if (!$scope.addMe) {return;}
+        if ($scope.products.indexOf($scope.addMe) == -1) {
+            $scope.products.push($scope.addMe);
+        } else {
+            $scope.errortext = "The item is already in your shopping list.";
+        }
+    }
+    $scope.removeItem = function (x) {
+        $scope.errortext = "";
+        $scope.products.splice(x, 1);
+    }
+});
+</script>
+
+</body>
+</html>
